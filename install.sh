@@ -2,7 +2,7 @@
 # Installs statusline-publish.py as the Claude Code status line, wrapping any existing status line
 # command so its output is unchanged. `install.sh uninstall` restores the previous command.
 set -e
-SOURCE="$(cd "$(dirname "$0")" && pwd)/statusline-publish.py"
+SOURCE="$(cd "$(dirname "$(readlink -f "$0" 2>/dev/null || echo "$0")")" && pwd)/statusline-publish.py"
 APP_DIR="${CLAUDE_USAGE_APP_DIR:-$HOME/Library/Application Support/ClaudeUsage}"
 # The script is copied out of the repo: a checkout under ~/Downloads, ~/Desktop or ~/Documents is not
 # readable for background processes (macOS privacy protection), and moving the repo must not break it.

@@ -10,7 +10,7 @@
 # Idempotent: re-running updates the scripts and keeps an existing publisher.json as it is; flags only
 # add to it. No admin rights, no questions.
 set -e
-DIR="$(cd "$(dirname "$0")" && pwd)"
+DIR="$(cd "$(dirname "$(readlink -f "$0" 2>/dev/null || echo "$0")")" && pwd)"   # resolve Homebrew symlinks
 APP_DIR="${CLAUDE_USAGE_APP_DIR:-$HOME/Library/Application Support/ClaudeUsage}"
 CONFIG="$APP_DIR/publisher.json"
 ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/ClaudeUsage/usage-snapshot.json"

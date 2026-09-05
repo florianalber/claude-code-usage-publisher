@@ -2,7 +2,7 @@
 # Installs a per-user launchd agent that runs usage-sync.py whenever the snapshot folder changes.
 # No admin rights needed. `install-watcher.sh uninstall` removes it, `status` shows launchd's view.
 set -e
-DIR="$(cd "$(dirname "$0")" && pwd)"
+DIR="$(cd "$(dirname "$(readlink -f "$0" 2>/dev/null || echo "$0")")" && pwd)"   # resolve Homebrew symlinks
 LABEL="${CLAUDE_USAGE_AGENT_LABEL:-io.fatec.claudeusage.publisher}"
 APP_DIR="${CLAUDE_USAGE_APP_DIR:-$HOME/Library/Application Support/ClaudeUsage}"
 PLIST="$HOME/Library/LaunchAgents/$LABEL.plist"
